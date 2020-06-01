@@ -227,7 +227,7 @@ class Urlizer
             if (ord($c[0])>=240 && ord($c[0])<=247) { $ord = (ord($c[0])-240)*262144 + (ord($c[1])-128)*4096 + (ord($c[2])-128)*64 + (ord($c[3])-128); }
             if (ord($c[0])>=248 && ord($c[0])<=251) { $ord = (ord($c[0])-248)*16777216 + (ord($c[1])-128)*262144 + (ord($c[2])-128)*4096 + (ord($c[3])-128)*64 + (ord($c[4])-128); }
             if (ord($c[0])>=252 && ord($c[0])<=253) { $ord = (ord($c[0])-252)*1073741824 + (ord($c[1])-128)*16777216 + (ord($c[2])-128)*262144 + (ord($c[3])-128)*4096 + (ord($c[4])-128)*64 + (ord($c[5])-128); }
-            if (ord($c[0])>=254 && ord($c[0])<=255) { $chars{$i} = $unknown; continue; } //error
+            if (ord($c[0])>=254 && ord($c[0])<=255) { $chars[$i] = $unknown; continue; } //error
 
             $bank = $ord >> 8;
 
@@ -242,9 +242,9 @@ class Urlizer
 
             $newchar = $ord & 255;
             if (array_key_exists($newchar, $UTF8_TO_ASCII[$bank])) {
-                $chars{$i} = $UTF8_TO_ASCII[$bank][$newchar];
+                $chars[$i] = $UTF8_TO_ASCII[$bank][$newchar];
             } else {
-                $chars{$i} = $unknown;
+                $chars[$i] = $unknown;
             }
         }
 
